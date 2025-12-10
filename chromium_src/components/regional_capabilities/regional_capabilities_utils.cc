@@ -244,6 +244,9 @@ std::vector<const PrepopulatedEngine*> GetBravePrepopulatedEnginesForCountryID(
 TemplateURLPrepopulateData::BravePrepopulatedEngineID GetDefaultSearchEngine(
     country_codes::CountryId country_id,
     int version) {
+  // Force Brave as default everywhere
+  return TemplateURLPrepopulateData::PREPOPULATED_ENGINE_ID_BRAVE;
+
   // LINT.IfChange
   const TemplateURLPrepopulateData::BravePrepopulatedEngineID default_v6 =
       TemplateURLPrepopulateData::PREPOPULATED_ENGINE_ID_GOOGLE;

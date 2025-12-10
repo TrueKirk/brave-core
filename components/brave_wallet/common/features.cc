@@ -13,11 +13,11 @@ namespace brave_wallet::features {
 
 BASE_FEATURE(kNativeBraveWalletFeature,
              "NativeBraveWallet",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 
 BASE_FEATURE(kBraveWalletBitcoinFeature,
              "BraveWalletBitcoin",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 const base::FeatureParam<int> kBitcoinRpcThrottle{&kBraveWalletBitcoinFeature,
                                                   "rpc_throttle", 1};
 const base::FeatureParam<bool> kBitcoinTestnetDiscovery{
@@ -25,15 +25,15 @@ const base::FeatureParam<bool> kBitcoinTestnetDiscovery{
 
 BASE_FEATURE(kBraveWalletBitcoinImportFeature,
              "BraveWalletBitcoinImport",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 
 BASE_FEATURE(kBraveWalletBitcoinLedgerFeature,
              "BraveWalletBitcoinLedger",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 
 BASE_FEATURE(kBraveWalletZCashFeature,
              "BraveWalletZCash",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 
 BASE_FEATURE(kBraveWalletPolkadotFeature,
              "BraveWalletPolkadot",
@@ -42,7 +42,7 @@ BASE_FEATURE(kBraveWalletPolkadotFeature,
 BASE_FEATURE(kBraveWalletCardanoFeature,
              "BraveWalletCardano",
 #if !BUILDFLAG(IS_ANDROID) && !BUILDFLAG(IS_IOS)
-             base::FEATURE_ENABLED_BY_DEFAULT
+             base::FEATURE_DISABLED_BY_DEFAULT
 #else
              base::FEATURE_DISABLED_BY_DEFAULT
 

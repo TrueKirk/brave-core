@@ -15,7 +15,7 @@
 
 namespace ai_chat::features {
 
-BASE_FEATURE(kAIChat, "AIChat", base::FEATURE_ENABLED_BY_DEFAULT);
+BASE_FEATURE(kAIChat, "AIChat", base::FEATURE_DISABLED_BY_DEFAULT);
 const base::FeatureParam<std::string> kAIModelsDefaultKey{
 #if BUILDFLAG(IS_IOS)
     &kAIChat, "default_model", "chat-basic"};
@@ -60,10 +60,9 @@ bool IsAIChatEnabled() {
 
 BASE_FEATURE(kAIChatHistory,
              "AIChatHistory",
-#if BUILDFLAG(IS_IOS)
              base::FEATURE_DISABLED_BY_DEFAULT);
 #else
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 #endif
 
 bool IsAIChatHistoryEnabled() {
@@ -148,7 +147,7 @@ bool IsPageContextEnabledInitially() {
 
 BASE_FEATURE(kTabOrganization,
              "BraveTabOrganization",
-             base::FEATURE_ENABLED_BY_DEFAULT);
+             base::FEATURE_DISABLED_BY_DEFAULT);
 
 bool IsTabOrganizationEnabled() {
   return base::FeatureList::IsEnabled(features::kTabOrganization);

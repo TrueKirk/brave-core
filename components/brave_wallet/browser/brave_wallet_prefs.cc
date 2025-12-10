@@ -218,7 +218,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
       static_cast<int>(brave_wallet::mojom::DefaultWallet::BraveWallet));
   registry->RegisterStringPref(kDefaultBaseCurrency, "USD");
   registry->RegisterStringPref(kDefaultBaseCryptocurrency, "BTC");
-  registry->RegisterBooleanPref(kShowWalletIconOnToolbar, true);
+  registry->RegisterBooleanPref(kShowWalletIconOnToolbar, false);
   registry->RegisterDictionaryPref(kBraveWalletP3AActiveWalletDict);
   registry->RegisterDictionaryPref(kBraveWalletKeyrings);
   registry->RegisterBooleanPref(kBraveWalletKeyringEncryptionKeysMigrated,
@@ -239,7 +239,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterDictionaryPref(kBraveWalletLastTransactionSentTimeDict);
   registry->RegisterTimePref(kBraveWalletLastDiscoveredAssetsAt, base::Time());
 
-  registry->RegisterBooleanPref(kShouldShowWalletSuggestionBadge, true);
+  registry->RegisterBooleanPref(kShouldShowWalletSuggestionBadge, false);
   registry->RegisterBooleanPref(kBraveWalletNftDiscoveryEnabled, false);
   registry->RegisterBooleanPref(kBraveWalletPrivateWindowsEnabled, false);
 

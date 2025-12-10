@@ -257,49 +257,49 @@ void BraveToolbarView::Init() {
       std::make_unique<SidePanelButton>(browser()),
       *container_view->GetIndexOf(GetAppMenuButton()) - 1);
 
-  wallet_ = container_view->AddChildViewAt(
-      std::make_unique<WalletButton>(GetAppMenuButton(), profile),
-      *container_view->GetIndexOf(GetAppMenuButton()) - 1);
-  wallet_->SetTriggerableEventFlags(ui::EF_LEFT_MOUSE_BUTTON |
-                                    ui::EF_MIDDLE_MOUSE_BUTTON);
-  wallet_->UpdateImageAndText();
+  // wallet_ = container_view->AddChildViewAt(
+  //     std::make_unique<WalletButton>(GetAppMenuButton(), profile),
+  //     *container_view->GetIndexOf(GetAppMenuButton()) - 1);
+  // wallet_->SetTriggerableEventFlags(ui::EF_LEFT_MOUSE_BUTTON |
+  //                                   ui::EF_MIDDLE_MOUSE_BUTTON);
+  // wallet_->UpdateImageAndText();
 
-  UpdateWalletButtonVisibility();
+  // UpdateWalletButtonVisibility();
 
   // Don't check policy status since we're going to
   // setup a watcher for policy pref.
-  if (ai_chat::IsAllowedForContext(browser_->profile(), false)) {
-    ai_chat_button_ = container_view->AddChildViewAt(
-        std::make_unique<AIChatButton>(browser()),
-        *container_view->GetIndexOf(GetAppMenuButton()) - 1);
-    show_ai_chat_button_.Init(
-        ai_chat::prefs::kBraveAIChatShowToolbarButton,
-        browser_->profile()->GetPrefs(),
-        base::BindRepeating(&BraveToolbarView::UpdateAIChatButtonVisibility,
-                            base::Unretained(this)));
-    hide_ai_chat_button_by_policy_.Init(
-        ai_chat::prefs::kEnabledByPolicy, profile->GetPrefs(),
-        base::BindRepeating(&BraveToolbarView::UpdateAIChatButtonVisibility,
-                            base::Unretained(this)));
-    UpdateAIChatButtonVisibility();
-  }
+  // if (ai_chat::IsAllowedForContext(browser_->profile(), false)) {
+  //   ai_chat_button_ = container_view->AddChildViewAt(
+  //       std::make_unique<AIChatButton>(browser()),
+  //       *container_view->GetIndexOf(GetAppMenuButton()) - 1);
+  //   show_ai_chat_button_.Init(
+  //       ai_chat::prefs::kBraveAIChatShowToolbarButton,
+  //       browser_->profile()->GetPrefs(),
+  //       base::BindRepeating(&BraveToolbarView::UpdateAIChatButtonVisibility,
+  //                           base::Unretained(this)));
+  //   hide_ai_chat_button_by_policy_.Init(
+  //       ai_chat::prefs::kEnabledByPolicy, profile->GetPrefs(),
+  //       base::BindRepeating(&BraveToolbarView::UpdateAIChatButtonVisibility,
+  //                           base::Unretained(this)));
+  //   UpdateAIChatButtonVisibility();
+  // }
 
-#if BUILDFLAG(ENABLE_BRAVE_VPN)
-  if (brave_vpn::BraveVpnServiceFactory::GetForProfile(profile)) {
-    brave_vpn_ = container_view->AddChildViewAt(
-        std::make_unique<BraveVPNButton>(browser()),
-        *container_view->GetIndexOf(GetAppMenuButton()) - 1);
-    show_brave_vpn_button_.Init(
-        brave_vpn::prefs::kBraveVPNShowButton, profile->GetPrefs(),
-        base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
-                            base::Unretained(this)));
-    hide_brave_vpn_button_by_policy_.Init(
-        brave_vpn::prefs::kManagedBraveVPNDisabled, profile->GetPrefs(),
-        base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
-                            base::Unretained(this)));
-    brave_vpn_->SetVisible(IsBraveVPNButtonVisible());
-  }
-#endif
+// #if BUILDFLAG(ENABLE_BRAVE_VPN)
+//   if (brave_vpn::BraveVpnServiceFactory::GetForProfile(profile)) {
+//     brave_vpn_ = container_view->AddChildViewAt(
+//         std::make_unique<BraveVPNButton>(browser()),
+//         *container_view->GetIndexOf(GetAppMenuButton()) - 1);
+//     show_brave_vpn_button_.Init(
+//         brave_vpn::prefs::kBraveVPNShowButton, profile->GetPrefs(),
+//         base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
+//                             base::Unretained(this)));
+//     hide_brave_vpn_button_by_policy_.Init(
+//         brave_vpn::prefs::kManagedBraveVPNDisabled, profile->GetPrefs(),
+//         base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
+//                             base::Unretained(this)));
+//     brave_vpn_->SetVisible(IsBraveVPNButtonVisible());
+//   }
+// #endif
 
   // Make sure that avatar button should be located right before the app menu.
   if (auto* avatar = GetAvatarToolbarButton()) {
@@ -352,9 +352,9 @@ void BraveToolbarView::OnThemeChanged() {
   if (display_mode_ == DisplayMode::NORMAL && bookmark_) {
     bookmark_->UpdateImageAndText();
   }
-  if (display_mode_ == DisplayMode::NORMAL && wallet_) {
-    wallet_->UpdateImageAndText();
-  }
+  // if (display_mode_ == DisplayMode::NORMAL && wallet_) {
+  //   wallet_->UpdateImageAndText();
+  // }
 }
 
 void BraveToolbarView::OnProfileAdded(const base::FilePath& profile_path) {
@@ -371,9 +371,9 @@ void BraveToolbarView::LoadImages() {
   if (bookmark_) {
     bookmark_->UpdateImageAndText();
   }
-  if (wallet_) {
-    wallet_->UpdateImageAndText();
-  }
+  // if (wallet_) {
+  //   wallet_->UpdateImageAndText();
+  // }
 }
 
 void BraveToolbarView::Update(content::WebContents* tab) {
@@ -518,33 +518,33 @@ void BraveToolbarView::ResetBookmarkButtonBounds() {
   }
 }
 
-void BraveToolbarView::UpdateAIChatButtonVisibility() {
-  bool should_show = ai_chat::IsAllowedForContext(browser()->profile()) &&
-                     show_ai_chat_button_.GetValue();
-  ai_chat_button_->SetVisible(should_show);
-}
+// void BraveToolbarView::UpdateAIChatButtonVisibility() {
+//   bool should_show = ai_chat::IsAllowedForContext(browser()->profile()) &&
+//                      show_ai_chat_button_.GetValue();
+//   ai_chat_button_->SetVisible(should_show);
+// }
 
-void BraveToolbarView::UpdateWalletButtonVisibility() {
-  Profile* profile = browser()->profile();
-  if (brave_wallet::IsNativeWalletEnabled() &&
-      brave_wallet::IsAllowedForContext(profile)) {
-    // Hide all if user wants to hide.
-    if (!show_wallet_button_.GetValue()) {
-      wallet_->SetVisible(false);
-      return;
-    }
-
-    if (!profile->IsIncognitoProfile()) {
-      wallet_->SetVisible(true);
-      return;
-    }
-
-    wallet_->SetVisible(wallet_private_window_enabled_.GetValue());
-    return;
-  }
-
-  wallet_->SetVisible(false);
-}
+// void BraveToolbarView::UpdateWalletButtonVisibility() {
+//   Profile* profile = browser()->profile();
+//   if (brave_wallet::IsNativeWalletEnabled() &&
+//       brave_wallet::IsAllowedForContext(profile)) {
+//     // Hide all if user wants to hide.
+//     if (!show_wallet_button_.GetValue()) {
+//       wallet_->SetVisible(false);
+//       return;
+//     }
+//
+//     if (!profile->IsIncognitoProfile()) {
+//       wallet_->SetVisible(true);
+//       return;
+//     }
+//
+//     wallet_->SetVisible(wallet_private_window_enabled_.GetValue());
+//     return;
+//   }
+//
+//   wallet_->SetVisible(false);
+// }
 
 BEGIN_METADATA(BraveToolbarView)
 END_METADATA

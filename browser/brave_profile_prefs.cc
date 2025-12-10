@@ -202,11 +202,31 @@ void OverrideDefaultPrefValues(user_prefs::PrefRegistrySyncable* registry) {
   registry->SetDefaultPrefValue(
       prefs::kSafeBrowsingExtendedReportingOptInAllowed, base::Value(false));
 
+  registry->SetDefaultPrefValue(prefs::kSafeBrowsingEnabled, base::Value(false));
+
 #if defined(TOOLKIT_VIEWS)
   // Disable side search by default.
   // Copied from side_search_prefs.cc because it's not exported.
   constexpr char kSideSearchEnabled[] = "side_search.enabled";
   registry->SetDefaultPrefValue(kSideSearchEnabled, base::Value(false));
+#endif
+
+  // Neonide: Always show full URLs
+  registry->SetDefaultPrefValue(omnibox::kPreventUrlElisionsInOmnibox,
+                                base::Value(true));
+
+  // Neonide: Disable Fingerprinting protection (Allow fingerprinting)
+  // 1 = CONTENT_SETTING_ALLOW
+  registry->SetDefaultPrefValue(
+      "profile.default_content_setting_values.brave_fingerprinting_v2",
+      base::Value(1));
+
+#if BUILDFLAG(ENABLE_AI_CHAT)
+  // Neonide: Disable AI Chat UI elements by default
+  registry->SetDefaultPrefValue(ai_chat::prefs::kBraveAIChatShowToolbarButton,
+                                base::Value(false));
+  registry->SetDefaultPrefValue(ai_chat::prefs::kBraveAIChatContextMenuEnabled,
+                                base::Value(false));
 #endif
 
   // Disable search suggestion
@@ -302,7 +322,7 @@ void RegisterProfilePrefsForMigration(
 #endif
 
   // Added Feb 2023
-  registry->RegisterBooleanPref(brave_rewards::prefs::kShowButton, true);
+  registry->RegisterBooleanPref(brave_rewards::prefs::kShowButton, false);
 
   brave_rewards::RegisterProfilePrefsForMigration(registry);
 
@@ -396,7 +416,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(brave_shields::prefs::kTwitterEmbedControlType,
                                 true);
   registry->RegisterBooleanPref(brave_shields::prefs::kLinkedInEmbedControlType,
-                                false);
+                                true);
   registry->RegisterBooleanPref(brave_shields::prefs::kAdBlockDeveloperMode,
                                 false);
   registry->RegisterIntegerPref(brave_shields::prefs::kShieldsDisabledCount, 0);
@@ -426,13 +446,13 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(kNewTabPageShowClock, false);
   registry->RegisterStringPref(kNewTabPageClockFormat, "");
   registry->RegisterBooleanPref(kNewTabPageShowStats, true);
-  registry->RegisterBooleanPref(kNewTabPageShowRewards, true);
-  registry->RegisterBooleanPref(kNewTabPageShowBraveTalk, true);
+  registry->RegisterBooleanPref(kNewTabPageShowRewards, false);
+  registry->RegisterBooleanPref(kNewTabPageShowBraveTalk, false);
   registry->RegisterBooleanPref(kBraveTalkDisabledByPolicy, false);
   registry->RegisterBooleanPref(kNewTabPageHideAllWidgets, false);
 
 #if BUILDFLAG(ENABLE_BRAVE_VPN)
-  registry->RegisterBooleanPref(kNewTabPageShowBraveVPN, true);
+  registry->RegisterBooleanPref(kNewTabPageShowBraveVPN, false);
 #endif
 
 // Private New Tab Page

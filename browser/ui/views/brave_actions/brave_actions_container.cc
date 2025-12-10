@@ -56,7 +56,7 @@ void BraveActionsContainer::Init() {
   // make sure separator is at index 0
   AddChildViewAt(brave_button_separator_, 0);
   AddActionViewForShields();
-  AddActionViewForRewards();
+  // AddActionViewForRewards();
 
   // React to Brave Rewards preferences changes.
   show_brave_rewards_button_.Init(
@@ -84,23 +84,23 @@ void BraveActionsContainer::AddActionViewForShields() {
   shields_action_btn_->Init();
 }
 
-void BraveActionsContainer::AddActionViewForRewards() {
-  auto button =
-      std::make_unique<BraveRewardsActionView>(browser_window_interface_);
-  rewards_action_btn_ = AddChildViewAt(std::move(button), 2);
-  rewards_action_btn_->SetPreferredSize(GetActionSize());
-  rewards_action_btn_->SetVisible(ShouldShowBraveRewardsAction());
-  rewards_action_btn_->Update();
-}
+// void BraveActionsContainer::AddActionViewForRewards() {
+//   auto button =
+//       std::make_unique<BraveRewardsActionView>(browser_window_interface_);
+//   rewards_action_btn_ = AddChildViewAt(std::move(button), 2);
+//   rewards_action_btn_->SetPreferredSize(GetActionSize());
+//   rewards_action_btn_->SetVisible(ShouldShowBraveRewardsAction());
+//   rewards_action_btn_->Update();
+// }
 
 void BraveActionsContainer::Update() {
   if (shields_action_btn_) {
     shields_action_btn_->Update();
   }
 
-  if (rewards_action_btn_) {
-    rewards_action_btn_->Update();
-  }
+  // if (rewards_action_btn_) {
+  //   rewards_action_btn_->Update();
+  // }
 
   UpdateVisibility();
   DeprecatedLayoutImmediately();
@@ -113,9 +113,9 @@ void BraveActionsContainer::UpdateVisibility() {
     can_show = shields_action_btn_->GetVisible();
   }
 
-  if (rewards_action_btn_) {
-    can_show = can_show || rewards_action_btn_->GetVisible();
-  }
+  // if (rewards_action_btn_) {
+  //   can_show = can_show || rewards_action_btn_->GetVisible();
+  // }
 
   // If no buttons are visible, then we want to hide this view so that the
   // separator is not displayed.
@@ -137,11 +137,11 @@ void BraveActionsContainer::ChildPreferredSizeChanged(views::View* child) {
 }
 
 // Brave Rewards preferences change observers callback
-void BraveActionsContainer::OnBraveRewardsPreferencesChanged() {
-  if (rewards_action_btn_) {
-    rewards_action_btn_->SetVisible(ShouldShowBraveRewardsAction());
-  }
-}
+// void BraveActionsContainer::OnBraveRewardsPreferencesChanged() {
+//   if (rewards_action_btn_) {
+//     rewards_action_btn_->SetVisible(ShouldShowBraveRewardsAction());
+//   }
+// }
 
 BEGIN_METADATA(BraveActionsContainer)
 END_METADATA

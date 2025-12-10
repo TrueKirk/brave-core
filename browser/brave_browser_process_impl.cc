@@ -131,19 +131,19 @@ BraveBrowserProcessImpl::BraveBrowserProcessImpl(StartupData* startup_data)
   g_brave_browser_process = this;
 
   // early initialize referrals
-  brave_referrals_service();
+  // brave_referrals_service();
 
   // Disabled on mobile platforms, see for instance issues/6176
   // Create P3A Service early to catch more histograms. The full initialization
   // should be started once browser process impl is ready.
-  p3a_service();
+  // p3a_service();
   histogram_braveizer_ = p3a::HistogramsBraveizer::Create();
 
   // initialize ads stats helper
-  ads_brave_stats_helper();
+  // ads_brave_stats_helper();
 
   // early initialize brave stats
-  brave_stats_updater();
+  // brave_stats_updater();
 
   // early initialize misc metrics
   process_misc_metrics();
@@ -413,41 +413,45 @@ p3a::P3AService* BraveBrowserProcessImpl::p3a_service() {
   if (p3a_service_) {
     return p3a_service_.get();
   }
-  p3a_service_ = base::MakeRefCounted<p3a::P3AService>(
-      *local_state(), brave::GetChannelName(),
-      brave_stats::GetFirstRunTime(local_state()),
-      p3a::P3AConfig::LoadFromCommandLine());
-  p3a_service()->InitCallbacks();
-  return p3a_service_.get();
+  return nullptr; // P3A Disabled
+  // p3a_service_ = base::MakeRefCounted<p3a::P3AService>(
+  //     *local_state(), brave::GetChannelName(),
+  //     brave_stats::GetFirstRunTime(local_state()),
+  //     p3a::P3AConfig::LoadFromCommandLine());
+  // p3a_service()->InitCallbacks();
+  // return p3a_service_.get();
 }
 
 brave::BraveReferralsService*
 BraveBrowserProcessImpl::brave_referrals_service() {
   if (!brave_referrals_service_) {
-    brave_referrals_service_ = std::make_unique<brave::BraveReferralsService>(
-        local_state(), brave_stats::GetAPIKey(),
-        brave_stats::GetPlatformIdentifier());
-    brave_referrals_service_->set_delegate(
-        std::make_unique<ReferralsServiceDelegate>(
-            brave_referrals_service_.get()));
+    // brave_referrals_service_ = std::make_unique<brave::BraveReferralsService>(
+    //     local_state(), brave_stats::GetAPIKey(),
+    //     brave_stats::GetPlatformIdentifier());
+    // brave_referrals_service_->set_delegate(
+    //     std::make_unique<ReferralsServiceDelegate>(
+    //         brave_referrals_service_.get()));
   }
-  return brave_referrals_service_.get();
+  return nullptr; // Referrals Disabled
+  // return brave_referrals_service_.get();
 }
 
 brave_stats::BraveStatsUpdater* BraveBrowserProcessImpl::brave_stats_updater() {
   if (!brave_stats_updater_) {
-    brave_stats_updater_ = std::make_unique<brave_stats::BraveStatsUpdater>(
-        local_state(), profile_manager());
+    // brave_stats_updater_ = std::make_unique<brave_stats::BraveStatsUpdater>(
+    //     local_state(), profile_manager());
   }
-  return brave_stats_updater_.get();
+  return nullptr; // Stats Updater Disabled
+  // return brave_stats_updater_.get();
 }
 
 brave_ads::BraveStatsHelper* BraveBrowserProcessImpl::ads_brave_stats_helper() {
   if (!brave_stats_helper_) {
-    brave_stats_helper_ = std::make_unique<brave_ads::BraveStatsHelper>(
-        local_state(), profile_manager());
+    // brave_stats_helper_ = std::make_unique<brave_ads::BraveStatsHelper>(
+        // local_state(), profile_manager());
   }
-  return brave_stats_helper_.get();
+  return nullptr; // Ads Stats Disabled
+  // return brave_stats_helper_.get();
 }
 
 brave_ads::ResourceComponent* BraveBrowserProcessImpl::resource_component() {

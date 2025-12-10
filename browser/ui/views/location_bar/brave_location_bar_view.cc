@@ -116,24 +116,24 @@ void BraveLocationBarView::Init() {
     }
   }
 
-  if (!browser_->profile()->IsOffTheRecord()) {
-    brave_news_action_icon_view_ =
-        AddChildView(std::make_unique<BraveNewsActionIconView>(
-            browser_->profile(), this, this));
-    brave_news_action_icon_view_->SetVisible(false);
-    views::InkDrop::Get(brave_news_action_icon_view_)
-        ->SetVisibleOpacity(GetPageActionInkDropVisibleOpacity());
-  }
+  // if (!browser_->profile()->IsOffTheRecord()) {
+  //   brave_news_action_icon_view_ =
+  //       AddChildView(std::make_unique<BraveNewsActionIconView>(
+  //           browser_->profile(), this, this));
+  //   brave_news_action_icon_view_->SetVisible(false);
+  //   views::InkDrop::Get(brave_news_action_icon_view_)
+  //       ->SetVisibleOpacity(GetPageActionInkDropVisibleOpacity());
+  // }
 #if BUILDFLAG(ENABLE_TOR)
   onion_location_view_ = AddChildView(
       std::make_unique<OnionLocationView>(browser_->profile(), this, this));
 #endif
 
-  if (PromotionButtonController::PromotionEnabled(profile()->GetPrefs())) {
-    promotion_button_ = AddChildView(std::make_unique<PromotionButtonView>());
-    promotion_controller_ = std::make_unique<PromotionButtonController>(
-        promotion_button_, omnibox_view_, browser());
-  }
+  // if (PromotionButtonController::PromotionEnabled(profile()->GetPrefs())) {
+  //   promotion_button_ = AddChildView(std::make_unique<PromotionButtonView>());
+  //   promotion_controller_ = std::make_unique<PromotionButtonController>(
+  //       promotion_button_, omnibox_view_, browser());
+  // }
 
   // brave action buttons
   brave_actions_ = AddChildView(
@@ -178,9 +178,9 @@ void BraveLocationBarView::Update(content::WebContents* contents) {
   }
 #endif
 
-  if (brave_news_action_icon_view_) {
-    brave_news_action_icon_view_->Update();
-  }
+  // if (brave_news_action_icon_view_) {
+  //   brave_news_action_icon_view_->Update();
+  // }
 
   LocationBarView::Update(contents);
 }
@@ -225,16 +225,16 @@ void BraveLocationBarView::OnChanged() {
   }
 #endif
 
-  if (brave_news_action_icon_view_) {
-    brave_news_action_icon_view_->Update();
-  }
+  // if (brave_news_action_icon_view_) {
+  //   brave_news_action_icon_view_->Update();
+  // }
 
-  if (promotion_controller_) {
-    const bool show_button =
-        promotion_controller_->ShouldShowSearchPromotionButton() &&
-        !ShouldChipOverrideLocationIcon() && !ShouldShowKeywordBubble();
-    promotion_controller_->Show(show_button);
-  }
+  // if (promotion_controller_) {
+  //   const bool show_button =
+  //       promotion_controller_->ShouldShowSearchPromotionButton() &&
+  //       !ShouldChipOverrideLocationIcon() && !ShouldShowKeywordBubble();
+  //   promotion_controller_->Show(show_button);
+  // }
 
   // OnChanged calls Layout
   LocationBarView::OnChanged();
@@ -242,9 +242,9 @@ void BraveLocationBarView::OnChanged() {
 
 std::vector<views::View*> BraveLocationBarView::GetRightMostTrailingViews() {
   std::vector<views::View*> views;
-  if (brave_news_action_icon_view_) {
-    views.push_back(brave_news_action_icon_view_);
-  }
+  // if (brave_news_action_icon_view_) {
+  //   views.push_back(brave_news_action_icon_view_);
+  // }
 
   if (brave_actions_) {
     views.push_back(brave_actions_);
