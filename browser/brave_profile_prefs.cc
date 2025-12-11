@@ -221,13 +221,11 @@ void OverrideDefaultPrefValues(user_prefs::PrefRegistrySyncable* registry) {
       "profile.default_content_setting_values.brave_fingerprinting_v2",
       base::Value(1));
 
-#if BUILDFLAG(ENABLE_AI_CHAT)
   // Neonide: Disable AI Chat UI elements by default
   registry->SetDefaultPrefValue(ai_chat::prefs::kBraveAIChatShowToolbarButton,
                                 base::Value(false));
   registry->SetDefaultPrefValue(ai_chat::prefs::kBraveAIChatContextMenuEnabled,
                                 base::Value(false));
-#endif
 
   // Disable search suggestion
   registry->SetDefaultPrefValue(prefs::kSearchSuggestEnabled,
