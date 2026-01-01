@@ -202,7 +202,8 @@ void OverrideDefaultPrefValues(user_prefs::PrefRegistrySyncable* registry) {
   registry->SetDefaultPrefValue(
       prefs::kSafeBrowsingExtendedReportingOptInAllowed, base::Value(false));
 
-  registry->SetDefaultPrefValue(prefs::kSafeBrowsingEnabled, base::Value(false));
+  registry->SetDefaultPrefValue(prefs::kSafeBrowsingEnabled,
+                                base::Value(false));
 
 #if defined(TOOLKIT_VIEWS)
   // Disable side search by default.
@@ -385,6 +386,12 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   registry->RegisterBooleanPref(kMRUCyclingEnabled, false);
   registry->RegisterBooleanPref(kTabsSearchShow, true);
   registry->RegisterBooleanPref(kTabMuteIndicatorNotClickable, false);
+
+  // Neonide: Register missing preference to prevent crash
+  registry->RegisterIntegerPref(
+      "profile.default_content_setting_values.brave_fingerprinting_v2", 1);
+  registry->RegisterBooleanPref("brave.ai_chat.show_toolbar_button", false);
+  registry->RegisterBooleanPref("brave.ai_chat.context_menu_enabled", false);
 
   brave_sync::Prefs::RegisterProfilePrefs(registry);
 

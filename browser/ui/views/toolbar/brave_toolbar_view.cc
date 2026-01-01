@@ -196,23 +196,24 @@ void BraveToolbarView::Init() {
       base::BindRepeating(&BraveToolbarView::OnShowBookmarksButtonChanged,
                           base::Unretained(this)));
 
-  show_wallet_button_.Init(
-      kShowWalletIconOnToolbar, browser_->profile()->GetPrefs(),
-      base::BindRepeating(&BraveToolbarView::UpdateWalletButtonVisibility,
-                          base::Unretained(this)));
+  // show_wallet_button_.Init(
+  //     kShowWalletIconOnToolbar, browser_->profile()->GetPrefs(),
+  //     base::BindRepeating(&BraveToolbarView::UpdateWalletButtonVisibility,
+  //                         base::Unretained(this)));
 
-  wallet_disabled_by_policy_.Init(
-      brave_wallet::prefs::kDisabledByPolicy, browser_->profile()->GetPrefs(),
-      base::BindRepeating(&BraveToolbarView::UpdateWalletButtonVisibility,
-                          base::Unretained(this)));
+  // wallet_disabled_by_policy_.Init(
+  //     brave_wallet::prefs::kDisabledByPolicy,
+  //     browser_->profile()->GetPrefs(),
+  //     base::BindRepeating(&BraveToolbarView::UpdateWalletButtonVisibility,
+  //                         base::Unretained(this)));
 
-  if (browser_->profile()->IsIncognitoProfile() &&
-      !browser_->profile()->IsTor()) {
-    wallet_private_window_enabled_.Init(
-        kBraveWalletPrivateWindowsEnabled, browser_->profile()->GetPrefs(),
-        base::BindRepeating(&BraveToolbarView::UpdateWalletButtonVisibility,
-                            base::Unretained(this)));
-  }
+  // if (browser_->profile()->IsIncognitoProfile() &&
+  //     !browser_->profile()->IsTor()) {
+  //   wallet_private_window_enabled_.Init(
+  //       kBraveWalletPrivateWindowsEnabled, browser_->profile()->GetPrefs(),
+  //       base::BindRepeating(&BraveToolbarView::UpdateWalletButtonVisibility,
+  //                           base::Unretained(this)));
+  // }
 
   // track changes in wide locationbar setting
   location_bar_is_wide_.Init(
@@ -284,22 +285,22 @@ void BraveToolbarView::Init() {
   //   UpdateAIChatButtonVisibility();
   // }
 
-// #if BUILDFLAG(ENABLE_BRAVE_VPN)
-//   if (brave_vpn::BraveVpnServiceFactory::GetForProfile(profile)) {
-//     brave_vpn_ = container_view->AddChildViewAt(
-//         std::make_unique<BraveVPNButton>(browser()),
-//         *container_view->GetIndexOf(GetAppMenuButton()) - 1);
-//     show_brave_vpn_button_.Init(
-//         brave_vpn::prefs::kBraveVPNShowButton, profile->GetPrefs(),
-//         base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
-//                             base::Unretained(this)));
-//     hide_brave_vpn_button_by_policy_.Init(
-//         brave_vpn::prefs::kManagedBraveVPNDisabled, profile->GetPrefs(),
-//         base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
-//                             base::Unretained(this)));
-//     brave_vpn_->SetVisible(IsBraveVPNButtonVisible());
-//   }
-// #endif
+  // #if BUILDFLAG(ENABLE_BRAVE_VPN)
+  //   if (brave_vpn::BraveVpnServiceFactory::GetForProfile(profile)) {
+  //     brave_vpn_ = container_view->AddChildViewAt(
+  //         std::make_unique<BraveVPNButton>(browser()),
+  //         *container_view->GetIndexOf(GetAppMenuButton()) - 1);
+  //     show_brave_vpn_button_.Init(
+  //         brave_vpn::prefs::kBraveVPNShowButton, profile->GetPrefs(),
+  //         base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
+  //                             base::Unretained(this)));
+  //     hide_brave_vpn_button_by_policy_.Init(
+  //         brave_vpn::prefs::kManagedBraveVPNDisabled, profile->GetPrefs(),
+  //         base::BindRepeating(&BraveToolbarView::OnVPNButtonVisibilityChanged,
+  //                             base::Unretained(this)));
+  //     brave_vpn_->SetVisible(IsBraveVPNButtonVisible());
+  //   }
+  // #endif
 
   // Make sure that avatar button should be located right before the app menu.
   if (auto* avatar = GetAvatarToolbarButton()) {

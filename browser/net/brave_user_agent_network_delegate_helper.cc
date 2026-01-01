@@ -19,7 +19,7 @@ namespace {
 
 constexpr char kHeaderSecCHUA[] = "Sec-CH-UA";
 constexpr char kHeaderSecCHUAFullVersionList[] = "Sec-CH-UA-Full-Version-List";
-constexpr char kBraveBrand[] = "\"Brave\"";
+constexpr char kBraveBrand[] = "\"Neonide\"";
 constexpr char kGoogleChromeBrand[] = "\"Google Chrome\"";
 
 void ReplaceBraveWithGoogleChromeInHeader(net::HttpRequestHeaders* headers,

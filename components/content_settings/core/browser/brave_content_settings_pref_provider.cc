@@ -215,6 +215,8 @@ void BravePrefProvider::MigrateShieldsSettings(bool incognito) {
   MigrateShieldsSettingsV2ToV3();
 
   MigrateShieldsSettingsV3ToV4(version);
+
+  MigrateShieldsSettingsV4ToV5();
 }
 
 void BravePrefProvider::EnsureNoWildcardEntries(
@@ -429,6 +431,21 @@ void BravePrefProvider::MigrateShieldsSettingsV3ToV4(int start_version) {
     MigrateShieldsSettingsV2ToV3();
   }
   prefs_->SetInteger(kBraveShieldsSettingsVersion, 4);
+}
+
+void BravePrefProvider::MigrateShieldsSettingsV4ToV5() {
+  if (prefs_->GetInteger(kBraveShieldsSettingsVersion) != 4) {
+    return;
+  }
+
+  // Force default to ALLOW
+  SetWebsiteSettingInternal(
+      ContentSettingsPattern::Wildcard(), ContentSettingsPattern::Wildcard(),
+      ContentSettingsType::BRAVE_FINGERPRINTING_V2,
+      base::Value(CONTENT_SETTING_ALLOW), ContentSettingConstraints());
+
+  // Mark migration as done.
+  prefs_->SetInteger(kBraveShieldsSettingsVersion, 5);
 }
 
 void BravePrefProvider::MigrateShieldsSettingsV1ToV2ForOneType(

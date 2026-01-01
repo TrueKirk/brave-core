@@ -596,24 +596,8 @@ SidebarItem SidebarService::GetBuiltInItemForType(
     SidebarItem::BuiltInItemType type) const {
   switch (type) {
     case SidebarItem::BuiltInItemType::kBraveTalk:
-      if (!prefs_->GetBoolean(kBraveTalkDisabledByPolicy)) {
-        return SidebarItem::Create(
-            GURL(kBraveTalkURL),
-            l10n_util::GetStringUTF16(IDS_SIDEBAR_BRAVE_TALK_ITEM_TITLE),
-            SidebarItem::Type::kTypeBuiltIn,
-            SidebarItem::BuiltInItemType::kBraveTalk,
-            /* open_in_panel = */ false);
-      }
       return SidebarItem();
     case SidebarItem::BuiltInItemType::kWallet: {
-      if (brave_wallet::IsAllowed(prefs_)) {
-        return SidebarItem::Create(
-            GURL("chrome://wallet/"),
-            l10n_util::GetStringUTF16(IDS_SIDEBAR_WALLET_ITEM_TITLE),
-            SidebarItem::Type::kTypeBuiltIn,
-            SidebarItem::BuiltInItemType::kWallet,
-            /* open_in_panel = */ false);
-      }
       return SidebarItem();
     }
     case SidebarItem::BuiltInItemType::kBookmarks:

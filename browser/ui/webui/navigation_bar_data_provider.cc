@@ -26,10 +26,6 @@ void NavigationBarDataProvider::Initialize(content::WebUIDataSource* source,
                              IDS_BRAVE_UI_BRAVE_REWARDS_TOOLBAR);
   source->AddLocalizedString("brToolbarWalletsTitle", IDS_WALLETS_TITLE);
 
-  source->AddBoolean(
-      "brToolbarShowRewardsButton",
-      brave_rewards::IsSupportedForProfile(
-          profile, brave_rewards::IsSupportedOptions::kSkipRegionCheck));
-  source->AddBoolean("isBraveWalletAllowed",
-                     brave_wallet::IsAllowedForContext(profile));
+  source->AddBoolean("brToolbarShowRewardsButton", false);
+  source->AddBoolean("isBraveWalletAllowed", false);
 }

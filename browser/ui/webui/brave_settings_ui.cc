@@ -202,19 +202,14 @@ void BraveSettingsUI::AddResources(content::WebUIDataSource* html_source,
            !profile->GetPrefs()->IsManagedPreference(
                speedreader::kSpeedreaderEnabled)));
 #endif
-  html_source->AddBoolean(
-      "isNativeBraveWalletFeatureEnabled",
-      base::FeatureList::IsEnabled(
-          brave_wallet::features::kNativeBraveWalletFeature));
+  html_source->AddBoolean("isNativeBraveWalletFeatureEnabled", false);
   html_source->AddBoolean("isCardanoDappSupportFeatureEnabled",
                           brave_wallet::IsCardanoDAppSupportEnabled());
-  html_source->AddBoolean("isBraveWalletAllowed",
-                          brave_wallet::IsAllowedForContext(profile));
+  html_source->AddBoolean("isBraveWalletAllowed", false);
   html_source->AddBoolean("isForgetFirstPartyStorageFeatureEnabled",
                           base::FeatureList::IsEnabled(
                               net::features::kBraveForgetFirstPartyStorage));
-  html_source->AddBoolean("isBraveRewardsSupported",
-                          brave_rewards::IsSupportedForProfile(profile));
+  html_source->AddBoolean("isBraveRewardsSupported", false);
   html_source->AddBoolean(
       "areShortcutsSupported",
       base::FeatureList::IsEnabled(commands::features::kBraveCommands));

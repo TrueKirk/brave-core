@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-import {html} from 'chrome://resources/polymer/v3_0/polymer/polymer_bundled.min.js'
+import { html } from 'chrome://resources/polymer/v3_0/polymer/polymer_bundled.min.js'
 
 import {
   RegisterPolymerTemplateModifications,
@@ -23,7 +23,7 @@ RegisterStyleOverride(
 )
 
 const extractVersions = (versionElement: Element) => {
-  const [ _, braveVersion, chromiumVersion, build ] = versionElement
+  const [_, braveVersion, chromiumVersion, build] = versionElement
     .textContent?.match(/(\d+\.\d+(?:\.\d+)*)\D+(\d+\.\d+(?:\.\d+)*)(.*)/) ?? []
 
   return { braveVersion, build, chromiumVersion }
@@ -35,17 +35,24 @@ const buildBraveVersionLink = (braveVersion: string, build: string) => {
   wrapper.setAttribute('target', '_blank')
   wrapper.setAttribute('rel', 'noopener noreferrer')
   wrapper.setAttribute('href', 'https://brave.com/latest/')
-  wrapper.textContent = `Brave ${braveVersion} ${build}`
+  wrapper.textContent = `Neonide ${braveVersion} ${build}`
 
   return wrapper
 }
 
-const buildChromiumVersionElement = (chromiumVersion:string) => {
+const buildChromiumVersionElement = (chromiumVersion: string) => {
   const chromiumElement = document.createElement('div')
   chromiumElement.classList.add("secondary")
   chromiumElement.textContent = `Chromium: ${chromiumVersion}`
 
   return chromiumElement
+}
+
+const buildCreditElement = () => {
+  const creditElement = document.createElement('div')
+  creditElement.classList.add("secondary")
+  creditElement.textContent = "Made with ❤️ by Kirill Kovalevsky"
+  return creditElement
 }
 
 RegisterPolymerTemplateModifications({
@@ -77,6 +84,9 @@ RegisterPolymerTemplateModifications({
 
       const chromiumVersionElement = buildChromiumVersionElement(chromiumVersion)
       braveVersionLink.after(chromiumVersionElement)
+
+      const creditElement = buildCreditElement()
+      chromiumVersionElement.after(creditElement)
     }
 
     // Help link shown if update fails
@@ -89,8 +99,8 @@ RegisterPolymerTemplateModifications({
       // </if>
 
       // <if expr="not is_win">
-        updateStatusMessageLink.href =
-          'https://community.brave.app?p=update_error'
+      updateStatusMessageLink.href =
+        'https://community.brave.app?p=update_error'
       // </if>
     }
   }

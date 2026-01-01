@@ -59,12 +59,12 @@ void BraveActionsContainer::Init() {
   // AddActionViewForRewards();
 
   // React to Brave Rewards preferences changes.
-  show_brave_rewards_button_.Init(
-      brave_rewards::prefs::kShowLocationBarButton,
-      browser_window_interface_->GetProfile()->GetPrefs(),
-      base::BindRepeating(
-          &BraveActionsContainer::OnBraveRewardsPreferencesChanged,
-          base::Unretained(this)));
+  // show_brave_rewards_button_.Init(
+  //     brave_rewards::prefs::kShowLocationBarButton,
+  //     browser_window_interface_->GetProfile()->GetPrefs(),
+  //     base::BindRepeating(
+  //         &BraveActionsContainer::OnBraveRewardsPreferencesChanged,
+  //         base::Unretained(this)));
 }
 
 bool BraveActionsContainer::ShouldShowBraveRewardsAction() const {

@@ -96,6 +96,7 @@ class BravePrefProvider : public PrefProvider, public Observer {
   void MigrateShieldsSettingsV1ToV2ForOneType(ContentSettingsType content_type);
   void MigrateShieldsSettingsV2ToV3();
   void MigrateShieldsSettingsV3ToV4(int start_version);
+  void MigrateShieldsSettingsV4ToV5();
   void MigrateFingerprintingSettings();
   void MigrateFingerprintingSetingsToOriginScoped();
   void MigrateCosmeticFilteringSettings();
